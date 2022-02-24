@@ -12,19 +12,6 @@
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
-            <label for="name" class="sr-only">Name</label>
-            <input
-              id="name"
-              v-model="form.name"
-              name="name"
-              type="text"
-              autocomplete="name"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Name"
-            />
-          </div>
-          <div>
             <label for="email-address" class="sr-only">Email address</label>
             <input
               id="email-address"
@@ -33,15 +20,15 @@
               type="email"
               autocomplete="email"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
           </div>
           <div>
             <input
               id="password"
-              v-model="form.password"
               name="password"
+              v-model="form.password"
               type="password"
               autocomplete="current-password"
               required
@@ -49,29 +36,12 @@
               placeholder="Password"
             />
           </div>
-
-          <div class="pt-6">
-            <label for="role">You are ?</label>
-            <select
-              id="role"
-              v-model="form.role"
-              name="role"
-              type="role"
-              autocomplete="current-role"
-              required
-              class="appearance-none pt-2 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="role"
-            >
-              <option v-for="role in roles" :value="role.id">
-                {{ role.name }}
-              </option>
-            </select>
-          </div>
         </div>
+
         <div class="text-center">
-          Have an account ?
+          Don't have account ?
           <span class="text-indigo-700"
-            ><nuxt-link to="login">Login</nuxt-link></span
+            ><nuxt-link to="register">Create Account</nuxt-link></span
           >
         </div>
         <div>
@@ -92,32 +62,14 @@ export default {
   data() {
     return {
       form: {
-        name: "mohamed",
         email: "mohamed@gmail.com",
         password: "password1234",
-        role: 1,
       },
-
-      roles: [
-        { name: "submitter", id: 1 },
-        { name: "reviewer", id: 2 },
-        { name: "client", id: 3 },
-      ],
     };
   },
+
   methods: {
     submit() {
-      this.$axios
-        .post("register", this.form)
-        .then((response) => {
-          this.login();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
-    login() {
       this.$auth
         .loginWith("laravelJWT", {
           data: {
@@ -125,7 +77,8 @@ export default {
             password: this.form.password,
           },
         })
-        .then(() => {
+        .then((res) => {
+          this.$auth.setUser(res.data);
           this.$router.push({ name: "index" });
         })
         .catch(() => {});

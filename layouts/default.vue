@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen"><NavBar /> <Nuxt /></div>
+  <div class=""><NavBar /> <Nuxt /></div>
 </template>
 
 <script>

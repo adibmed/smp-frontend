@@ -31,8 +31,8 @@ export default {
   auth: {
     redirect: {
       login: '/login',
-      logout: '/login',
-      home: '/home'
+      logout: '/logout',
+      home: '/'
     },
     strategies: {
       laravelJWT: {
@@ -56,6 +56,10 @@ export default {
         }
       }
     }
+  },
+
+  router: {
+    middleware: ['auth']
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components

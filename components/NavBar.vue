@@ -5,26 +5,27 @@
     </div>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
       <div class="text-sm lg:flex-grow">
-        <a
-          href="#responsive-header"
+        <nuxt-link
+          to="/"
           class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-black mr-4"
         >
           Products
-        </a>
-        <a
-          href="#responsive-header"
+        </nuxt-link>
+        <nuxt-link
+          :to="{ name: 'approved' }"
           class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-black mr-4"
         >
           Approved
-        </a>
+        </nuxt-link>
       </div>
       <div>
-        <button
-          v-if="$auth.loggedIn && $auth.user.role_id === '1'"
+        <nuxt-link
+          to="new"
+          v-if="$auth.loggedIn && $auth.user.role_id == 1"
           class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-teal-500 hover:bg-indigo-700 mt-4 lg:mt-0"
         >
           Submit Product
-        </button>
+        </nuxt-link>
         <nuxt-link
           v-if="!$auth.loggedIn"
           to="login"

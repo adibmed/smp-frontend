@@ -2,7 +2,7 @@
   <div class="h-full">
     <div class="mt-32 w-full max-w-5xl mx-auto">
       <div class="text-3xl font-black text-indigo-700 text-center">
-        Products List
+        Approved Products List
       </div>
       <product-list :products="products" />
     </div>
@@ -14,7 +14,7 @@ import ProductList from "~/components/ProductList.vue";
 export default {
   name: "IndexPage",
   components: { ProductList },
-  middleware: "auth",
+  middleware: "reviewer",
   data() {
     return {
       products: [],
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     getProducts() {
-      this.$axios.get("product").then((response) => {
+      this.$axios.get("product/approved").then((response) => {
         this.products = response.data;
       });
     },
