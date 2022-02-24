@@ -24,7 +24,16 @@ export default {
   plugins: [
   ],
 
+  axios: {
+    baseUrl: process.env.API_URL || 'http://localhost:8000/api/v1/'
+  },
+
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/home'
+    },
     strategies: {
       laravelJWT: {
         provider: 'laravel/jwt',
@@ -54,8 +63,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss'
   ],
@@ -66,13 +73,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next'
   ],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
-  },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

@@ -1,16 +1,21 @@
 <template>
-  <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div
+    class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
     <div class="max-w-md w-full space-y-8">
       <div>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in</h2>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Sign in
+        </h2>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form class="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
             <label for="email-address" class="sr-only">Email address</label>
             <input
               id="email-address"
+              v-model="form.email"
               name="email"
               type="email"
               autocomplete="email"
@@ -23,6 +28,7 @@
             <input
               id="password"
               name="password"
+              v-model="form.password"
               type="password"
               autocomplete="current-password"
               required
@@ -34,11 +40,13 @@
 
         <div class="text-center">
           Don't have account ?
-          <span class="text-indigo-700"><nuxt-link to="register">Create Account</nuxt-link></span>
+          <span class="text-indigo-700"
+            ><nuxt-link to="register">Create Account</nuxt-link></span
+          >
         </div>
         <div>
           <button
-            type="submit"
+            @click.prevent="submit"
             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Sign in
@@ -48,3 +56,33 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      form: {
+        email: "mohamed@gmail.com",
+        password: "password1234",
+      },
+    };
+  },
+
+  methods: {
+    submit() {
+      this.$auth
+        .loginWith("laravelJWT", {
+          data: {
+            email: this.form.email,
+            password: this.form.password,
+          },
+        })
+        .then((res) => {
+          this.$auth.setUser(res.data);
+          this.$router.push({ name: "index" });
+        })
+        .catch(() => {});
+    },
+  },
+};
+</script>
