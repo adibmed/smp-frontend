@@ -8,6 +8,18 @@
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
+            <label for="name" class="sr-only">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Name"
+            />
+          </div>
+          <div>
             <label for="email-address" class="sr-only">Email address</label>
             <input
               id="email-address"
@@ -15,7 +27,7 @@
               type="email"
               autocomplete="email"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
           </div>
@@ -31,10 +43,9 @@
             />
           </div>
         </div>
-
         <div class="text-center">
-          Don't have account ?
-          <span class="text-indigo-700"><nuxt-link to="register">Create Account</nuxt-link></span>
+          Have an account ?
+          <span class="text-indigo-700"><nuxt-link to="login">Login</nuxt-link></span>
         </div>
         <div>
           <button
