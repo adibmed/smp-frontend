@@ -49,6 +49,24 @@
               placeholder="Password"
             />
           </div>
+
+          <div class="pt-6">
+            <label for="role">You are ?</label>
+            <select
+              id="role"
+              v-model="form.role"
+              name="role"
+              type="role"
+              autocomplete="current-role"
+              required
+              class="appearance-none pt-2 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="role"
+            >
+              <option v-for="role in roles" :value="role.id">
+                {{ role.name }}
+              </option>
+            </select>
+          </div>
         </div>
         <div class="text-center">
           Have an account ?
@@ -77,7 +95,14 @@ export default {
         name: "mohamed",
         email: "mohamed@gmail.com",
         password: "password1234",
+        role: 1,
       },
+
+      roles: [
+        { name: "submitter", id: 1 },
+        { name: "reviewer", id: 2 },
+        { name: "client", id: 3 },
+      ],
     };
   },
   methods: {

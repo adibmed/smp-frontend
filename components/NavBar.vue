@@ -1,0 +1,64 @@
+<template>
+  <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+    <div class="flex items-center flex-shrink-0 text-black mr-6">
+      <span class="font-semibold text-xl tracking-tight">SMP</span>
+    </div>
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+      <div class="text-sm lg:flex-grow">
+        <a
+          href="#responsive-header"
+          class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-black mr-4"
+        >
+          Products
+        </a>
+        <a
+          href="#responsive-header"
+          class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-black mr-4"
+        >
+          Approved
+        </a>
+      </div>
+      <div>
+        <button
+          v-if="$auth.loggedIn && $auth.user.role_id === '1'"
+          class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-teal-500 hover:bg-indigo-700 mt-4 lg:mt-0"
+        >
+          Submit Product
+        </button>
+        <nuxt-link
+          v-if="!$auth.loggedIn"
+          to="login"
+          class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-teal-500 hover:bg-indigo-700 mt-4 lg:mt-0"
+        >
+          Login
+        </nuxt-link>
+
+        <nuxt-link
+          v-if="!$auth.loggedIn"
+          to="register"
+          class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-teal-500 hover:bg-indigo-700 mt-4 lg:mt-0"
+        >
+          Create Account
+        </nuxt-link>
+
+        <button
+          @click="logout()"
+          v-if="$auth.loggedIn"
+          class="inline-block text-sm px-4 py-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-teal-500 hover:bg-indigo-700 mt-4 lg:mt-0"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  methods: {
+    logout() {
+      this.$auth.logout();
+    },
+  },
+};
+</script>

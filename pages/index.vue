@@ -14,6 +14,7 @@ import ProductList from "~/components/ProductList.vue";
 export default {
   name: "IndexPage",
   components: { ProductList },
+
   data() {
     return {
       products: [],

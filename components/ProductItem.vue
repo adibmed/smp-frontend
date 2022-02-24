@@ -15,6 +15,9 @@
               {{ name }}
             </h2>
           </div>
+          <div class="text-sm text-gray-500">
+            {{ description.substring(0, 50) }}
+          </div>
         </div>
         <div class="mt-1 text-xl font-semibold">${{ price }}</div>
       </div>
