@@ -12,6 +12,7 @@
             <input
               id="name"
               name="name"
+              v-model="form.name"
               type="text"
               autocomplete="name"
               required
@@ -23,6 +24,7 @@
             <label for="email-address" class="sr-only">Email address</label>
             <input
               id="email-address"
+              v-model="form.email"
               name="email"
               type="email"
               autocomplete="email"
@@ -34,6 +36,7 @@
           <div>
             <input
               id="password"
+              v-model="form.password"
               name="password"
               type="password"
               autocomplete="current-password"
@@ -59,3 +62,17 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        form: {
+          name: 'adsf',
+          email: 'asdf',
+          password: 'asdf'
+        }
+      }
+    }
+  }
+</script>
