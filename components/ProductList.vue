@@ -13,10 +13,12 @@
     >
       <product-item
         v-for="product in products"
+        :id="product.id"
         :name="product.name"
         :description="product.description"
         :image="product.image"
         :price="Number(product.price)"
+        :approved="product.status === 'approved'"
       />
     </div>
   </div>

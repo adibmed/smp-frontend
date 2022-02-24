@@ -20,6 +20,19 @@
           </div>
         </div>
         <div class="mt-1 text-xl font-semibold">${{ price }}</div>
+        <button
+          :disabled="approved"
+          @click="approveProduct"
+          v-if="isAuthenticatedUserReviewer"
+          class="p-1 text-sm rounded my-1 text-white"
+          :class="
+            approved
+              ? 'bg-green-300 cursor-not-allowed'
+              : 'bg-indigo-500 hover:bg-indigo-700'
+          "
+        >
+          {{ approved ? "Approved" : "Approve" }}
+        </button>
       </div>
     </div>
   </div>
@@ -27,10 +40,25 @@
 <script>
 export default {
   props: {
+    id: { type: Number, required: true },
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     image: { type: String, required: true },
+    approved: { type: Boolean, required: false },
+  },
+  computed: {
+    isAuthenticatedUserReviewer() {
+      return this.$auth.user.role_id == 2;
+    },
+  },
+
+  methods: {
+    approveProduct() {
+      this.$axios.post(`product/${this.id}/approve`).then(() => {
+        this.$router.push("/approved");
+      });
+    },
   },
 };
 </script>
