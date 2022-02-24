@@ -24,6 +24,31 @@ export default {
   plugins: [
   ],
 
+  auth: {
+    strategies: {
+      laravelJWT: {
+        provider: 'laravel/jwt',
+        url: process.env.API_URL || 'http://localhost:8000/api/v1/',
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          user: { url: 'user', method: 'get', propertyName: 'data' },
+          refresh: { url: 'refresh', method: 'post' },
+          logout: {
+            url: 'logout',
+            method: 'post'
+          }
+        },
+        token: {
+          property: 'access_token',
+          maxAge: 60 * 60
+        },
+        refreshToken: {
+          maxAge: 20160 * 60
+        }
+      }
+    }
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -38,7 +63,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
