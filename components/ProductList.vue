@@ -14,6 +14,7 @@
       >
         <product-item
           v-for="product in products"
+          :key="product.id"
           :id="product.id"
           :name="product.name"
           :description="product.description"
