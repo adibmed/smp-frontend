@@ -4,11 +4,8 @@
       Loading...
     </div>
     <div v-else>
-      <div
-        v-if="products.length === 0 && !isLoading"
-        class="text-xl text-center text-gray-700"
-      >
-        List empty!
+      <div v-if="error" class="text-xl text-center text-gray-700">
+        {{ errorMessage }}
       </div>
 
       <div
@@ -30,8 +27,10 @@
 </template>
 <script>
 import ProductItem from "./ProductItem.vue";
+
 export default {
   components: { ProductItem },
+
   props: {
     products: {
       type: Array,
@@ -40,6 +39,23 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+
+  data() {
+    return {
+      error: false,
+      errorMessage: "",
+    };
+  },
+
+  mounted() {
+    // empty list error handling
+    setTimeout(() => {
+      if (!this.isLoading && this.products.length == 0) {
+        this.error = true;
+        this.errorMessage = "List is empty";
+      }
+    }, 500);
   },
 };
 </script>
