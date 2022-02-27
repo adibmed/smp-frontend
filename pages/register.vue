@@ -76,9 +76,9 @@ export default {
   data() {
     return {
       form: {
-        name: "Mohamed Adibe",
-        email: "mohamed@gmail.com",
-        password: "password1234",
+        name: "",
+        email: "",
+        password: "",
         role: 1,
       },
       roles: [

@@ -70,10 +70,10 @@ export default {
   data() {
     return {
       form: {
-        name: "Canono Flowers",
-        description: "Proffesional camera",
-        price: "100.12",
-        image: "adsfasdf",
+        name: "",
+        description: "",
+        price: "",
+        image: "",
       },
     };
   },
@@ -81,6 +81,7 @@ export default {
   methods: {
     submit() {
       this.$store.dispatch(`products/${CREATE_PRODUCT}`, this.form);
+      this.$router.push({ name: "index" });
     },
   },
 };
