@@ -4,31 +4,32 @@
       <div class="text-3xl font-black text-indigo-700 text-center">
         Products List
       </div>
-      <product-list :products="products" />
+      <product-list :isLoading="isLoading" :products="products" />
     </div>
   </div>
 </template>
 
 <script>
 import ProductList from "~/components/ProductList.vue";
+import { mapState } from "vuex";
+import { GET_PRODUCTS } from "~/store/actions.type";
+
 export default {
   name: "IndexPage",
+
   components: { ProductList },
+
   middleware: "auth",
-  data() {
-    return {
-      products: [],
-    };
+
+  computed: {
+    ...mapState({
+      products: (state) => state.products.products,
+      isLoading: (state) => state.products.isLoading,
+    }),
   },
-  methods: {
-    getProducts() {
-      this.$axios.get("product").then((response) => {
-        this.products = response.data;
-      });
-    },
-  },
+
   mounted() {
-    this.getProducts();
+    this.$store.dispatch(`products/${GET_PRODUCTS}`);
   },
 };
 </script>

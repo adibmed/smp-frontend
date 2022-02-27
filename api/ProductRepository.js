@@ -1,9 +1,9 @@
 export default axios => ({
-    getAllSubmittedProducts() {
-        return axios.get('products')
+    all() {
+        return axios.get('product')
     },
 
-    getAllApprovedProducts() {
-        return axios.get('products/approved')
+    approved() {
+        return axios.get('product/approved')
     }
 })

@@ -1,7 +1,9 @@
 <template>
   <div class="w-full px-4 lg:px-0">
     <nuxt-link :to="{ name: 'product-id', params: { id } }">
-      <div class="p-3 bg-white rounded shadow-md  hover:shadow-lg hover:border-2">
+      <div
+        class="p-3 bg-white rounded shadow-md hover:shadow-lg hover:border-2"
+      >
         <div class="relative w-full mb-3 h-32 lg:mb-0">
           <img
             v-if="image.substring(0, 4) === 'http'"
