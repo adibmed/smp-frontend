@@ -1,13 +1,21 @@
-export default axios => ({
-    all() {
-        return axios.get('product')
-    },
+export default (axios) => ({
+  all() {
+    return axios.get("product");
+  },
 
-    create(payload) {
-        return axios.post('product', payload)
-    },
+  create(payload) {
+    return axios.post("product", payload);
+  },
 
-    approved() {
-        return axios.get('product/approved')
-    }
-})
+  update(payload) {
+    return axios.put("product", payload);
+  },
+
+  show(id) {
+    return axios.get(`product/${id}`);
+  },
+
+  approved() {
+    return axios.get("product/approved");
+  },
+});

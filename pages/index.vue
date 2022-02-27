@@ -28,7 +28,7 @@ export default {
     }),
   },
 
-  mounted() {
+  beforeCreate() {
     this.$store.dispatch(`products/${GET_PRODUCTS}`);
   },
 };

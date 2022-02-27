@@ -9,29 +9,20 @@
         </h2>
       </div>
       <form class="mt-8 space-y-6">
-        <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
-            <label for="name" class="sr-only">Name</label>
             <input
-              id="name"
               v-model="form.name"
-              name="name"
               type="text"
-              autocomplete="name"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Name"
             />
           </div>
           <div>
-            <label for="description" class="sr-only">Description</label>
             <input
-              id="description"
               v-model="form.description"
-              name="description"
               type="text"
-              autocomplete="description"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="description"
@@ -39,11 +30,8 @@
           </div>
           <div>
             <input
-              id="price"
               v-model="form.price"
-              name="price"
               type="number"
-              autocomplete="current-price"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="price"
@@ -52,11 +40,8 @@
 
           <div>
             <input
-              id="image"
               v-model="form.image"
-              name="image"
               type="text"
-              autocomplete="current-image"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="image"

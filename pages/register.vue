@@ -9,32 +9,44 @@
         </h2>
       </div>
       <form class="mt-8 space-y-6">
-        <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
-            <label for="email-address" class="sr-only">Email address</label>
             <input
-              id="email-address"
-              v-model="form.email"
-              name="email"
-              type="email"
-              autocomplete="email"
+              v-model="form.name"
+              type="text"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Name"
+            />
+          </div>
+          <div>
+            <input
+              v-model="form.email"
+              type="email"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
           </div>
           <div>
             <input
-              id="password"
-              name="password"
               v-model="form.password"
               type="password"
-              autocomplete="current-password"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Password"
             />
+          </div>
+
+          <div>
+            <select
+              v-model="form.role"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md mt-8 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            >
+              <option v-for="role in roles" :key="role.id" :value="role.id">
+                {{ role.name }}
+              </option>
+            </select>
           </div>
         </div>
 
@@ -63,14 +75,31 @@ export default {
   data() {
     return {
       form: {
+        name: "Mohamed Adibe",
         email: "mohamed@gmail.com",
         password: "password1234",
+        role: 1,
       },
+      roles: [
+        {
+          name: "Submitter",
+          id: 1,
+        },
+        {
+          name: "Reviewer",
+          id: 2,
+        },
+        {
+          name: "Client",
+          id: 3,
+        },
+      ],
     };
   },
 
   methods: {
     submit() {
+      this.$axios.post("register", this.form);
       this.$auth
         .loginWith("laravelJWT", {
           data: {
@@ -79,7 +108,6 @@ export default {
           },
         })
         .then((res) => {
-          this.$auth.setUser(res.data);
           this.$router.push({ name: "index" });
         })
         .catch(() => {});
