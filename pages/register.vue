@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import { REGISTER } from "~/store/actions.type";
 export default {
   auth: false,
   data() {
@@ -99,18 +100,7 @@ export default {
 
   methods: {
     submit() {
-      this.$axios.post("register", this.form);
-      this.$auth
-        .loginWith("laravelJWT", {
-          data: {
-            email: this.form.email,
-            password: this.form.password,
-          },
-        })
-        .then((res) => {
-          this.$router.push({ name: "index" });
-        })
-        .catch(() => {});
+      this.$store.dispatch(`user/${REGISTER}`, this.form);
     },
   },
 };

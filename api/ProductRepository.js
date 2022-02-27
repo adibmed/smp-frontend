@@ -15,7 +15,7 @@ export default (axios) => ({
     return axios.get(`product/${id}`);
   },
 
-  approved() {
-    return axios.get("product/approved");
+  submitted() {
+    return axios.get("product/submitted");
   },
 });

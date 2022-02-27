@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { LOGIN } from "~/store/actions.type";
 export default {
   data() {
     return {
@@ -62,17 +63,7 @@ export default {
 
   methods: {
     submit() {
-      this.$auth
-        .loginWith("laravelJWT", {
-          data: {
-            email: this.form.email,
-            password: this.form.password,
-          },
-        })
-        .then((res) => {
-          this.$router.push({ name: "index" });
-        })
-        .catch(() => {});
+      this.$store.dispatch(`user/${LOGIN}`, this.form);
     },
   },
 };

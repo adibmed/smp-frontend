@@ -66,6 +66,7 @@ import { CREATE_PRODUCT } from "~/store/actions.type";
 
 export default {
   middleware: "submitter",
+
   data() {
     return {
       form: {
@@ -76,9 +77,10 @@ export default {
       },
     };
   },
+
   methods: {
     submit() {
-      this.$store.dispatch(`product/${CREATE_PRODUCT}`, this.form);
+      this.$store.dispatch(`products/${CREATE_PRODUCT}`, this.form);
     },
   },
 };

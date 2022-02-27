@@ -23,35 +23,28 @@
           </div>
         </div>
 
-        <button
-          @click="approveProduct"
-          class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-        >
-          Approve
-        </button>
+        <ProductItemApproveButton
+          :id="product.id"
+          :approved="product.approved"
+        />
       </div>
     </div>
   </div>
 </template>
 <script>
-import { GET_PREVIEW_PRODUCT, UPDATE_PRODUCT } from "~/store/actions.type";
+import { GET_PREVIEW_PRODUCT } from "~/store/actions.type";
 import { mapState } from "vuex";
+import ProductItemApproveButton from "~/components/ProductItemApproveButton.vue";
 export default {
-  // middleware: "reviewer",
+  middleware: "reviewer",
+
+  components: { ProductItemApproveButton },
 
   computed: {
     ...mapState({
       product: (state) => state.products.previewProduct,
       isLoading: (state) => state.products.isLoading,
     }),
-  },
-
-  methods: {
-    approveProduct() {
-      const product = { ...this.product };
-      product.approved = true;
-      this.$store.dispatch(`products/${UPDATE_PRODUCT}`, product);
-    },
   },
 
   mounted() {

@@ -8,24 +8,33 @@
         <NavBarItem :to="'/'">
           <NavBarItemLabel :label="'Products'" />
         </NavBarItem>
-        <NavBarItem :to="'approved'">
-          <NavBarItemLabel :label="'Approved'" />
+        <NavBarItem
+          v-if="$auth.loggedIn && $auth.user.role === 'reviewer'"
+          :to="'/products'"
+        >
+          <NavBarItemLabel :label="'All Products'" />
         </NavBarItem>
       </div>
       <div class="flex flex-1 items-center justify-end">
-        <VButton v-if="$auth.loggedIn">
-          <nav-bar-item-label :label="userRole" />
-        </VButton>
+        <div
+          v-if="$auth.loggedIn"
+          class="px-2 font-bold capitalize bg-gray-100 p-1.5 mx-2 rounded-md text-gray-700 cursor-pointer hover:text-gray-900"
+        >
+          👨 {{ $auth.user.role }}
+        </div>
 
-        <VButton v-if="$auth.loggedIn && $auth.user.role_id == 1" :to="'new'">
+        <VButton
+          v-if="$auth.loggedIn && $auth.user.role === 'submitter'"
+          :to="'/new'"
+        >
           <nav-bar-item-label :label="'Submit'" />
         </VButton>
 
-        <VButton v-if="!$auth.loggedIn" :to="'login'">
+        <VButton v-if="!$auth.loggedIn" :to="'/login'">
           <nav-bar-item-label :label="'Login'" />
         </VButton>
 
-        <VButton v-if="!$auth.loggedIn" :to="'register'">
+        <VButton v-if="!$auth.loggedIn" :to="'/register'">
           <nav-bar-item-label :label="'Create Account'" />
         </VButton>
 
@@ -42,20 +51,14 @@ import NavBarItem from "./NavBarItem.vue";
 import NavBarItemLabel from "./NavBarItemLabel.vue";
 import VButton from "./VButton.vue";
 import VAppLogo from "./VAppLogo.vue";
+import { LOGOUT } from "~/store/actions.type";
+
 export default {
   components: { NavBarItem, NavBarItemLabel, VButton, VAppLogo },
-  computed: {
-    userRole() {
-      return this.$auth.user.role_id == 1
-        ? "Submitter"
-        : this.$auth.user.role_id == 2
-        ? "Reviewer"
-        : "Client";
-    },
-  },
+
   methods: {
     logout() {
-      this.$auth.logout();
+      this.$store.dispatch(`user/${LOGOUT}`);
     },
   },
 };

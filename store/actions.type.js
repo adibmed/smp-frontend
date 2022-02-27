@@ -1,5 +1,9 @@
 export const GET_PRODUCTS = "getProducts";
-export const GET_APPROVED_PRODUCTS = "getApprovedProducts";
+export const GET_SUBMITTED_PRODUCTS = "getSubmittedProducts";
 export const CREATE_PRODUCT = "createProduct";
 export const GET_PREVIEW_PRODUCT = "getPreviewProduct";
 export const UPDATE_PRODUCT = "updateProduct";
+export const LOGIN = "login";
+export const REGISTER = "register";
+export const LOGOUT = "logout";
+export const APPROVE_PRODUCT = "approveProduct";

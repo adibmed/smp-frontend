@@ -1,9 +1,7 @@
 <template>
-  <div class="w-full px-4 lg:px-0">
-    <nuxt-link :to="{ name: 'product-id', params: { id } }">
-      <div
-        class="p-3 bg-white rounded shadow-md hover:shadow-lg hover:border-2"
-      >
+  <div class="w-full px-4 lg:px-0 relative">
+    <div class="p-3 bg-white rounded shadow-md hover:shadow-lg hover:border-2">
+      <component :is="is" :to="to">
         <div class="relative w-full mb-3 h-32 lg:mb-0">
           <img
             v-if="image.substring(0, 4) === 'http'"
@@ -29,26 +27,19 @@
             </div>
           </div>
           <div class="mt-1 text-xl font-semibold">${{ price }}</div>
-          <button
-            :disabled="approved"
-            @click="approveProduct"
-            v-if="isAuthenticatedUserReviewer"
-            class="p-1 text-sm rounded my-1 text-white"
-            :class="
-              approved
-                ? 'bg-green-300 cursor-not-allowed'
-                : 'bg-indigo-500 hover:bg-indigo-700'
-            "
-          >
-            {{ approved ? "Approved" : "Approve" }}
-          </button>
         </div>
+      </component>
+      <div class="border-t pt-3 flex justify-end">
+        <ProductItemApproveButton :id="id" :approved="approved" />
       </div>
-    </nuxt-link>
+    </div>
   </div>
 </template>
 <script>
+import ProductItemApproveButton from "./ProductItemApproveButton.vue";
 export default {
+  components: { ProductItemApproveButton },
+
   props: {
     id: { type: Number, required: true },
     name: { type: String, required: true },
@@ -57,17 +48,19 @@ export default {
     image: { type: String, required: true },
     approved: { type: Boolean, required: false },
   },
-  computed: {
-    isAuthenticatedUserReviewer() {
-      return this.$auth.user.role_id == 2;
-    },
-  },
 
-  methods: {
-    approveProduct() {
-      this.$axios.post(`product/${this.id}/approve`).then(() => {
-        this.$router.push("/approved");
-      });
+  computed: {
+    is() {
+      if (this.$auth.user.role === "reviewer") return "nuxt-link";
+      return "div";
+    },
+
+    to() {
+      if (this.is === "nuxt-link") {
+        let productId = this.id;
+        return { name: "product-id", params: { id: productId } };
+      }
+      return null;
     },
   },
 };

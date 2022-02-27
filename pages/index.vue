@@ -1,8 +1,8 @@
 <template>
   <div class="h-full">
-    <div class="mt-16 w-full max-w-5xl mx-auto">
+    <div class="mt-32 w-full max-w-5xl mx-auto">
       <div class="text-3xl font-black text-indigo-700 text-center">
-        Products List
+        Products
       </div>
       <product-list :isLoading="isLoading" :products="products" />
     </div>
@@ -28,7 +28,7 @@ export default {
     }),
   },
 
-  beforeCreate() {
+  mounted() {
     this.$store.dispatch(`products/${GET_PRODUCTS}`);
   },
 };

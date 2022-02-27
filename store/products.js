@@ -2,19 +2,20 @@ import {
   SET_PRODUCTS,
   SET_PREVIEW_PRODUCT,
   SET_LOADING_PRODUCTS,
-  SET_APPROVED_PRODUCTS,
+  SET_SUBMITTED_PRODUCTS,
 } from "./mutations.type";
 import {
   GET_PRODUCTS,
-  GET_APPROVED_PRODUCTS,
+  GET_SUBMITTED_PRODUCTS,
   CREATE_PRODUCT,
   GET_PREVIEW_PRODUCT,
   UPDATE_PRODUCT,
+  APPROVE_PRODUCT,
 } from "./actions.type";
 
 export const state = () => ({
   products: [],
-  approvedProducts: [],
+  submittedProducts: [],
   isLoading: false,
   previewProduct: null,
 });
@@ -28,8 +29,8 @@ export const mutations = {
     state.isLoading = isLoading;
   },
 
-  [SET_APPROVED_PRODUCTS](state, approvedProducts) {
-    state.approvedProducts = approvedProducts;
+  [SET_SUBMITTED_PRODUCTS](state, submittedProducts) {
+    state.submittedProducts = submittedProducts;
   },
   [SET_PREVIEW_PRODUCT](state, previewProduct) {
     state.previewProduct = previewProduct;
@@ -50,15 +51,15 @@ export const actions = {
     commit(SET_LOADING_PRODUCTS, false);
   },
 
-  async [GET_APPROVED_PRODUCTS]({ commit }) {
+  async [GET_SUBMITTED_PRODUCTS]({ commit }) {
     commit(SET_LOADING_PRODUCTS, true);
-    const res = await this.$api.product.approved();
+    const res = await this.$api.product.submitted();
     const { status, data } = res;
     if (status === 200) {
-      commit(SET_APPROVED_PRODUCTS, data);
+      commit(SET_SUBMITTED_PRODUCTS, data);
     } else {
       // Handle error here
-      console.log("Failed to get approved products");
+      console.log("Failed to get submitted products");
     }
     commit(SET_LOADING_PRODUCTS, false);
   },

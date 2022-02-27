@@ -19,7 +19,7 @@
           :description="product.description"
           :image="product.image"
           :price="Number(product.price)"
-          :approved="product.status === 'approved'"
+          :approved="product.approved"
         />
       </div>
     </div>

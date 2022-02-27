@@ -1,5 +1,7 @@
-import ProductRepository from './ProductRepository';
+import ProductRepository from "./ProductRepository";
+import AuthRepository from "./AuthRepository";
 
 export default ($axios) => ({
-    product: ProductRepository($axios)
+  product: ProductRepository($axios),
+  auth: AuthRepository($axios),
 });

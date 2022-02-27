@@ -1,6 +1,5 @@
 export default function ({ $auth, redirect }) {
-    if ($auth.user.role_id != 1) {
-      return redirect('/login')
-    }
+  if ($auth.user.role === "reviewer") {
+    return redirect("/login");
   }
-  
+}
