@@ -13,6 +13,10 @@
         </NavBarItem>
       </div>
       <div class="flex flex-1 items-center justify-end">
+        <VButton v-if="$auth.loggedIn">
+          <nav-bar-item-label :label="userRole" />
+        </VButton>
+
         <VButton v-if="$auth.loggedIn && $auth.user.role_id == 1" :to="'new'">
           <nav-bar-item-label :label="'Submit'" />
         </VButton>
@@ -39,11 +43,20 @@ import NavBarItemLabel from "./NavBarItemLabel.vue";
 import VButton from "./VButton.vue";
 import VAppLogo from "./VAppLogo.vue";
 export default {
+  components: { NavBarItem, NavBarItemLabel, VButton, VAppLogo },
+  computed: {
+    userRole() {
+      return this.$auth.user.role_id == 1
+        ? "Submitter"
+        : this.$auth.user.role_id == 2
+        ? "Reviewer"
+        : "Client";
+    },
+  },
   methods: {
     logout() {
       this.$auth.logout();
     },
   },
-  components: { NavBarItem, NavBarItemLabel, VButton, VAppLogo },
 };
 </script>

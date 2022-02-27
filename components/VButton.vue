@@ -39,7 +39,7 @@ export default {
     },
 
     componentClass() {
-      return "text-sm px-4 py-2 mr-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-white hover:bg-indigo-700 cursor-pointer";
+      return "text-sm capatilize px-4 py-2 mr-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-white hover:bg-indigo-700 cursor-pointer";
     },
 
     activeClass() {
