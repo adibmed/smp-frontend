@@ -32,7 +32,6 @@ export default {
   auth: {
     redirect: {
       login: '/login',
-      logout: '/logout',
       home: '/'
     },
     strategies: {
