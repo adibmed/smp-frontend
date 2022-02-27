@@ -2,9 +2,10 @@
   <component
     :is="is"
     :class="componentClass"
-    :to="to"
     :href="href"
-    :exact-active-class="activeClass"
+    :type="computedType"
+    :to="to"
+    :disabled="disabled"
   >
     <slot />
   </component>
@@ -17,11 +18,15 @@ export default {
       type: String,
       default: null,
     },
+
     to: {
       type: String,
       default: null,
     },
+
+    disabled: Boolean,
   },
+
   computed: {
     is() {
       if (this.href) {
@@ -30,13 +35,21 @@ export default {
       if (this.to) {
         return "nuxt-link";
       }
-      return "div";
+      return "button";
     },
+
     componentClass() {
-      return "hover:bg-indigo-50 hover:text-indigo-700 py-1 px-2 rounded-md mr-4 cursor-pointer";
+      return "text-sm px-4 py-2 mr-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-white hover:bg-indigo-700 cursor-pointer";
     },
+
     activeClass() {
       return "bg-indigo-100";
+    },
+
+    computedType() {
+      if (this.is === "button") {
+        return this.type ?? "button";
+      }
     },
   },
 };

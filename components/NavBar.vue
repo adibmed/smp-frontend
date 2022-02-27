@@ -2,57 +2,32 @@
   <nav
     class="flex items-center justify-between flex-wrap bg-teal-500 p-6 bg-white shodow-md"
   >
-    <div class="flex items-center flex-shrink-0 text-black mr-6">
-      <span class="font-semibold text-xl tracking-tight">SMP</span>
-    </div>
-    <div class="flex-grow flex items-center w-auto">
-      <div class="text-sm flex-grow" v-if="$auth.loggedIn">
-        <NavBarItem :to="'/'"> <span>adasdfkjasdfi</span> </NavBarItem>
-        <nuxt-link
-          to="/"
-          class="mt-4 mt-0 hover:text-indigo-700 hover:bg-indigo-50 py-1 px-2 rounded-md mr-4"
-        >
-          Products
-        </nuxt-link>
-        <nuxt-link
-          :to="{ name: 'approved' }"
-          class="mt-4 mt-0 hover:text-indigo-700 hover:bg-indigo-50 py-1 px-2 rounded-md mr-4"
-        >
-          Approved
-        </nuxt-link>
+    <VAppLogo :title="'SMP'" />
+    <div class="flex-grow flex items-center justify-between w-auto">
+      <div class="text-sm flex" v-if="$auth.loggedIn">
+        <NavBarItem :to="'/'">
+          <NavBarItemLabel :label="'Products'" />
+        </NavBarItem>
+        <NavBarItem :to="'approved'">
+          <NavBarItemLabel :label="'Approved'" />
+        </NavBarItem>
       </div>
-      <div v-else class="flex-grow"></div>
-      <div>
-        <nuxt-link
-          to="new"
-          v-if="$auth.loggedIn && $auth.user.role_id == 1"
-          class="inline- text-sm px-4 py-2 mr-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-white hover:bg-indigo-700 mt-4 mt-0"
-        >
-          Submit Product
-        </nuxt-link>
-        <nuxt-link
-          v-if="!$auth.loggedIn"
-          to="login"
-          class="inline- text-sm px-4 py-2 mr-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-white hover:bg-indigo-700 mt-4 mt-0"
-        >
-          Login
-        </nuxt-link>
+      <div class="flex flex-1 items-center justify-end">
+        <VButton v-if="$auth.loggedIn && $auth.user.role_id == 1" :to="'new'">
+          <nav-bar-item-label :label="'Submit'" />
+        </VButton>
 
-        <nuxt-link
-          v-if="!$auth.loggedIn"
-          to="register"
-          class="inline- text-sm px-4 py-2 mr-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-white hover:bg-indigo-700 mt-4 mt-0"
-        >
-          Create Account
-        </nuxt-link>
+        <VButton v-if="!$auth.loggedIn" :to="'login'">
+          <nav-bar-item-label :label="'Login'" />
+        </VButton>
 
-        <button
-          @click="logout()"
-          v-if="$auth.loggedIn"
-          class="inline- text-sm px-4 py-2 mr-2 leading-none border rounded text-black border-black hover:border-transparent hover:text-white hover:bg-indigo-700 mt-4 mt-0"
-        >
-          Logout
-        </button>
+        <VButton v-if="!$auth.loggedIn" :to="'register'">
+          <nav-bar-item-label :label="'Create Account'" />
+        </VButton>
+
+        <VButton @click.native="logout()" v-if="$auth.loggedIn">
+          <nav-bar-item-label :label="'Logout'" />
+        </VButton>
       </div>
     </div>
   </nav>
@@ -60,12 +35,15 @@
 
 <script>
 import NavBarItem from "./NavBarItem.vue";
+import NavBarItemLabel from "./NavBarItemLabel.vue";
+import VButton from "./VButton.vue";
+import VAppLogo from "./VAppLogo.vue";
 export default {
   methods: {
     logout() {
       this.$auth.logout();
     },
   },
-  components: { NavBarItem },
+  components: { NavBarItem, NavBarItemLabel, VButton, VAppLogo },
 };
 </script>
