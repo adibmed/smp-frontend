@@ -3,6 +3,7 @@ import { GET_PRODUCTS } from "./actions.type"
 import { SET_LOADING_PRODUCTS } from "./mutations.type"
 import { GET_APPROVED_PRODUCTS } from "./actions.type"
 import { SET_APPROVED_PRODUCTS } from "./mutations.type"
+import { CREATE_PRODUCT } from "./actions.type"
 
 export const state = () => ({
     products: [],
@@ -50,6 +51,17 @@ export const actions = {
             console.log('Failed to get approved products')
         }
         commit(SET_LOADING_PRODUCTS, false)
+    },
+
+    async [CREATE_PRODUCT]({ commit }, product) {
+        const res = await this.$api.product.create(product);
+        const {status, data} = res;
+        if(status === 200) {
+            console.log('Product created successfully')
+        } else {
+            // Handle error here
+            console.log('Failed to create product')
+        }
     }
 }
 

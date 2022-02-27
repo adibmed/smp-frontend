@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import { CREATE_PRODUCT } from "~/store/actions.type";
+
 export default {
   middleware: "submitter",
   data() {
@@ -91,12 +93,7 @@ export default {
   },
   methods: {
     submit() {
-      this.$axios
-        .post("product", this.form)
-        .then((response) => {})
-        .catch((error) => {
-          console.log(error);
-        });
+      this.$store.dispatch(`product/${CREATE_PRODUCT}`, this.form);
     },
   },
 };
